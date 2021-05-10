@@ -1,1 +1,1 @@
-# workshop
+# Virtual Stock Market Simulator
