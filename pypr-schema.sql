@@ -16,7 +16,7 @@ CREATE TABLE `User` (
 );
     
 CREATE TABLE `Trades` (
-		`tradeID` INT UNIQUE NOT NULL,
+		`tradeID` CHAR(10) UNIQUE NOT NULL,
 	`userID` VARCHAR(45) UNIQUE NOT NULL,
 	`transactionTime` DATETIME NOT NULL,
     `ticker` VARCHAR(45) NOT NULL,
