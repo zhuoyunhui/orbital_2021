@@ -5,3 +5,9 @@ To include 'trade now!' button that creates a pop-up window
     1) Tradingview / alpha vantage(?) API to retrieve real time stock price 
     2) Firestore to update the trade records & retrieve userID data 
 */
+
+function PageTrade() {
+    return <p>trading page</p>
+}
+
+export default PageTrade;
