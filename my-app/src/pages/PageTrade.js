@@ -7,7 +7,7 @@ To include 'trade now!' button that creates a pop-up window
 */
 
 function PageTrade() {
-    return <p>trading page</p>
+    return <p>trading page hi yunhui</p>
 }
 
 export default PageTrade;
