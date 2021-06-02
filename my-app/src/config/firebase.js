@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
+
 export const config = {
     apiKey: "AIzaSyCha_PYH3Gv8emlGncWRhIMxjNdbicbnUA",
     authDomain: "pypr-7ed5a.firebaseapp.com",
@@ -24,6 +25,7 @@ firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export default firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => {
@@ -43,6 +45,8 @@ export const generateUserDocument = async (user, additionalData) => {
         displayName,
         email,
         photoURL,
+        unrealisedBalance: 10000,
+        availBalance: 10000,
         ...additionalData
       });
     } catch (error) {

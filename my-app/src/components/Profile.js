@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { UserContext } from "../providers/UserProvider";
 import {auth} from "../config/firebase";
+import AddTrade from "./Trade";
 
 
 const ProfilePage = () => {
     const user = useContext(UserContext);
-    const {photoURL, displayName, email} = user;
+    const {photoURL, displayName, email, availBalance, unrealisedBalance } = user;
     console.log(user);
     
   
@@ -26,7 +27,11 @@ const ProfilePage = () => {
           <h3 className = "italic">{email}</h3>
           </div>
         </div>
+        <div className = "unrBal">Unrealised Balance: {unrealisedBalance}</div>
+        <div className = "availBal">Available Balance: {availBalance}</div>
+        <AddTrade/>
         <button className = "w-full py-3 bg-red-600 mt-4 text-white" onClick = {() => {auth.signOut()}}>Sign out</button>
+        
       </div>
     ) 
   };
