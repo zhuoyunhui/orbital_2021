@@ -17,7 +17,7 @@ function PageAuth() {
             <p>Not logged in</p>
             <FirebaseAuthConsumer>
                 {({firebase }) => (
-                <Button onClick={() => handleSignIn(firebase)}> 
+                <Button variant="contained" color="primary" onClick={() => handleSignIn(firebase)}> 
                     Sign in with Google
                 </Button>
                 )}
