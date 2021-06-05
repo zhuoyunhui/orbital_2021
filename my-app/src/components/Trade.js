@@ -7,18 +7,19 @@ funtions:
     - if not able to purchase, then reject request & display an alert meessage?
 - stockPrice() : retrive real time stock market price for a given ticker 
 */
-import React, { useState, useContext } from 'react';
-import firebase from "../config/firebase";
+import React, { useState, useContext, } from 'react';
+import { firestore }  from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
+import firebase from "firebase/app";
 
-const AddTrade = () => {
+function AddTrade() {
     const user = useContext(UserContext);
 
     const initialTradeState = {
         tradeID: user.email + " @ " + new Date().toLocaleString(),
         transactionTime: new Date().toLocaleString(),
         ticker: "AAPL",
-        quantity: "",
+        quantity: 0,
         entPrice: 132.00,
         userID: user.email
     }
@@ -30,17 +31,51 @@ const AddTrade = () => {
         setTrade({ ...trade, [name]: value });
     };
 
-    const saveTrade = () => {
+    const SaveTrade = () => {
         var data = {
             tradeID: trade.tradeID,
             transactionTime: trade.transactionTime,
             ticker: trade.ticker,
-            quantity: trade.quantity,
+            quantity: parseInt(trade.quantity,10),
             entPrice: trade.entPrice,
             userID: trade.userID
         };
         /* update trades table */
-        firebase.collection("trades").add(data)
+        firestore.collection("trades").add(data)
+            
+        /* update users table (update urlBalance when we get real-time data)*/
+        firestore
+            .collection('users')
+            .doc(user.uid)
+            .update({ 
+                availBalance: user.availBalance - (trade.quantity * trade.entPrice)
+        })
+        
+        /* update positions table */
+        firestore
+            .collection('positions')
+            .where('ticker', '==', trade.ticker)
+            .where('userID', '==', user.email)
+            .get()
+            .then((snapshot) => {
+                if (!snapshot.empty) {
+                    firestore
+                        .collection('positions')
+                        .doc(user.email + trade.ticker)
+                        .update({
+                            quantity: firebase.firestore.FieldValue.increment(trade.quantity)
+                        })
+                } else {
+                    firestore
+                        .collection('positions')
+                        .doc(user.email + trade.ticker)
+                        .set({
+                            userID: user.email,
+                            ticker: trade.ticker,
+                            quantity: parseInt(trade.quantity,10)
+                        })
+                }
+            })
             .then(() => {
                 console.log("Traded Successfully.");
                 setSubmitted(true);
@@ -48,16 +83,6 @@ const AddTrade = () => {
             .catch((e) => {
                 console.log(e);
             });
-        /* update users table */
-        /*
-        const currABal = firebase.collection('users').doc(user.uid).get('availBalance');
-        firebase.collection('users').doc(user.uid).update({ 
-            availBalance: currABal
-        })
-        
-        /* update positions table */
-
-
     };
 
     const newTrade = () => {
@@ -70,13 +95,13 @@ const AddTrade = () => {
                 <div>
                     <h4>Traded Successfully.</h4>
                     <button className="btn-success" onClick={newTrade}>
-                        Add
+                        Buy
                     </button>
                 </div>
             ) : (
                 <div>
                     <div className="form-group">
-                        <label htmlFor="quantity">Quantity</label>
+                        <label htmlFor="quantity">Buy (quantity): </label>
                         <input 
                             type="number"
                             className="form-control"
@@ -87,7 +112,7 @@ const AddTrade = () => {
                             name="quantity"
                         />
                     </div>
-                    <button onClick={saveTrade} classname="btn-success">
+                    <button onClick={SaveTrade} classname="btn-success">
                         Submit
                     </button>
                 </div>
