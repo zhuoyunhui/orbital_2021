@@ -5,12 +5,13 @@ import AddTrade from "./Trade";
 import OpenPos from "./OpenPos";
 import Sell from "./Sell";
 import DisplayPos from "./DisplayPos";
+import DisplayStock from "./StockPage";
+
 
 const ProfilePage = () => {
     const user = useContext(UserContext);
     const {photoURL, displayName, email, availBalance, unrealisedBalance } = user;
     console.log(user);
-    
   
     return (
       <div className = "mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
@@ -35,8 +36,7 @@ const ProfilePage = () => {
           <Sell/>
           <DisplayPos/>
           <OpenPos/>
-        <button className = "w-full py-3 bg-red-600 mt-4 text-white" onClick = {() => {auth.signOut()}}>Sign out</button>
-        
+          <DisplayStock/>
       </div>
     ) 
   };

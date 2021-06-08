@@ -50,9 +50,3 @@ function OpenPos() {
 }
 
 export default OpenPos;
-
-
-
-
-
-
