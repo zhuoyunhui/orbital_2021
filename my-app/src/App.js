@@ -1,26 +1,31 @@
 import { IfFirebaseAuthed, IfFirebaseUnAuthed } from "@react-firebase/auth";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PageLogin from "./pages/PageLogin";
-import PageTrade from "./pages/PageTrade";
 import Navbar from "./components/Navbar/Navbar";
+import Home from "./components/pages/PageHome";
+import Trade from "./components/pages/PageTrade";
+import Portfolio from "./components/pages/PagePortfolio";
+import Profile from "./components/pages/PageProfile";
+import Login from "./components/pages/PageLogin";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path="/" />
-        </Switch>
-      </Router>
-
       <div className="App">
         <IfFirebaseAuthed>
-          <PageTrade />
+          <Router>
+            <Navbar />
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/trade" component={Trade} />
+              <Route path="/portfolio" component={Portfolio} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/login" component={Login} />
+            </Switch>
+          </Router>
         </IfFirebaseAuthed>
         <IfFirebaseUnAuthed>
-          <PageLogin />
+          <h1 className="hi">hi</h1>
         </IfFirebaseUnAuthed>
       </div>
     </>

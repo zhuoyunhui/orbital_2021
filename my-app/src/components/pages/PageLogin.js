@@ -13,7 +13,6 @@ function PageAuth() {
 
   return (
     <>
-      <p>Not logged in</p>
       <FirebaseAuthConsumer>
         {({ firebase }) => (
           <Button

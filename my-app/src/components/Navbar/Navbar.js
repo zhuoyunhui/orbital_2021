@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { RiStockFill } from "react-icons/ri";
 import { Button } from "../Button/Button";
-import "./Navbar.css";
 import { IconContext } from "react-icons/lib";
+import "./Navbar.css";
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -31,7 +31,7 @@ function Navbar() {
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className="navbar">
           <div className="navbar-container container">
-            <Link className="navbar-logo" onClick={closedMobileMenu}>
+            <Link className="navbar-logo" to="/" onClick={closedMobileMenu}>
               <RiStockFill className="navbar-icon" />
               PYPR
             </Link>
@@ -41,7 +41,7 @@ function Navbar() {
             <ul className={click ? "nav-menu active" : "nav-menu"}>
               <li className="nav-item">
                 <Link
-                  to="../pages/PageTrade"
+                  to="/trade"
                   className="nav-links"
                   onClick={closedMobileMenu}
                 >
@@ -50,7 +50,7 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <Link
-                  to="../pages/PagePortfolio"
+                  to="/portfolio"
                   className="nav-links"
                   onClick={closedMobileMenu}
                 >
@@ -59,7 +59,7 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <Link
-                  to="../pages/PageProfile"
+                  to="/profile"
                   className="nav-links"
                   onClick={closedMobileMenu}
                 >
@@ -68,11 +68,11 @@ function Navbar() {
               </li>
               <li className="nav-btn">
                 {button ? (
-                  <Link to="../pages/PageLogin" className="btn-link">
+                  <Link to="/login" className="btn-link">
                     <Button buttonStyle="btn--outline">SIGN UP</Button>
                   </Link>
                 ) : (
-                  <Link to="../pages/PageLogin" className="btn-link">
+                  <Link to="/login" className="btn-link">
                     <Button
                       buttonStyle="btn--outline"
                       buttonSize="btn--mobile"

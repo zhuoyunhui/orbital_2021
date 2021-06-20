@@ -6,8 +6,21 @@ To include 'trade now!' button that creates a pop-up window
     2) Firestore to update the trade records & retrieve userID data 
 */
 
-function PageTrade() {
-  return <p>trading page</p>;
-}
+import React from "react";
 
-export default PageTrade;
+const Trade = () => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "90vh",
+      }}
+    >
+      <h1>Trade</h1>
+    </div>
+  );
+};
+
+export default Trade;
