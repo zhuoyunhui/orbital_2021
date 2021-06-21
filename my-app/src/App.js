@@ -7,22 +7,25 @@ import Portfolio from "./components/pages/PagePortfolio";
 import Profile from "./components/pages/PageProfile";
 import Login from "./components/pages/PageLogin";
 import "./App.css";
+import UserProvider from "./providers/UserProvider";
 
 function App() {
   return (
     <>
       <div className="App">
         <IfFirebaseAuthed>
-          <Router>
-            <Navbar />
-            <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/trade" component={Trade} />
-              <Route path="/portfolio" component={Portfolio} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/login" component={Login} />
-            </Switch>
-          </Router>
+          <UserProvider>
+            <Router>
+              <Navbar />
+              <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/trade" component={Trade} />
+                <Route path="/portfolio" component={Portfolio} />
+                <Route path="/profile" component={Profile} />
+                <Route path="/login" component={Login} />
+              </Switch>
+            </Router>
+          </UserProvider>
         </IfFirebaseAuthed>
         <IfFirebaseUnAuthed>
           <h1 className="hi">hi</h1>

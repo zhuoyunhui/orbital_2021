@@ -6,6 +6,12 @@ To include 'trade now!' button that creates a pop-up window
     2) Firestore to update the trade records & retrieve userID data 
 */
 
+import AddTrade from "../Trade";
+import OpenPos from "../OpenPos";
+import Sell from "../Sell";
+import DisplayPos from "../DisplayPos";
+import DisplayStock from "../StockPage";
+
 import React from "react";
 
 const Trade = () => {
@@ -19,6 +25,11 @@ const Trade = () => {
       }}
     >
       <h1>Trade</h1>
+      <AddTrade />
+      <Sell />
+      <DisplayPos />
+      <OpenPos />
+      <DisplayStock />
     </div>
   );
 };
