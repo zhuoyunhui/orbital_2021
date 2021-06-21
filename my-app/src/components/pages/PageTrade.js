@@ -7,9 +7,7 @@ To include 'trade now!' button that creates a pop-up window
 */
 
 import AddTrade from "../Trade";
-import OpenPos from "../OpenPos";
 import Sell from "../Sell";
-import DisplayPos from "../DisplayPos";
 import DisplayStock from "../StockPage";
 
 import React from "react";
@@ -27,8 +25,6 @@ const Trade = () => {
       <h1>Trade</h1>
       <AddTrade />
       <Sell />
-      <DisplayPos />
-      <OpenPos />
       <DisplayStock />
     </div>
   );

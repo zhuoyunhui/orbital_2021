@@ -7,6 +7,8 @@ To include `sell` function under open positions
 */
 
 import React from "react";
+import OpenPos from "../OpenPos";
+import DisplayPos from "../DisplayPos";
 
 const Portfolio = () => {
   return (
@@ -19,6 +21,8 @@ const Portfolio = () => {
       }}
     >
       <h1>Portfolio</h1>
+      <DisplayPos />
+      <OpenPos />
     </div>
   );
 };
