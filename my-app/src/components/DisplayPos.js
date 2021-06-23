@@ -15,14 +15,22 @@ function DisplayPos() {
       });
   }, []);
   return (
-    <div className="DisplayPos">
-      {positions.map((vari) => (
-        <div>
-          <h4>{vari.ticker}</h4>
-          <h4>{vari.quantity}</h4>
-        </div>
-      ))}
-    </div>
+    <table class="DisplayTable">
+      <thead>
+        <tr>
+          <th>ticker</th>
+          <th>quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {positions.map((vari) => (
+          <tr>
+            <td>{vari.ticker}</td>
+            <td>{vari.quantity}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
