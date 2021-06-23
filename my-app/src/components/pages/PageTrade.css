@@ -1,0 +1,20 @@
+/*
+.widget {
+    padding-top:40px;
+    padding-right:255px;
+}
+*/
+
+.wrapper {
+    padding-top:40px;
+    display: flex;
+}
+
+.widget {
+    flex: 1;
+    border: 2px;
+}  
+
+.functions {
+    margin-right: 40px;
+} 

@@ -9,23 +9,29 @@ To include 'trade now!' button that creates a pop-up window
 import AddTrade from "../Trade";
 import Sell from "../Sell";
 import DisplayStock from "../StockPage";
-
+import TradingViewWidget, { Themes } from "react-tradingview-widget";
 import React from "react";
+import "./PageTrade.css";
 
 const Trade = () => {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "90vh",
-      }}
-    >
-      <h1>Trade</h1>
-      <AddTrade />
-      <Sell />
-      <DisplayStock />
+    <div class = "wrapper" style={{
+          justifyContent: "center",
+        }}>
+      <div class="widget">
+        <TradingViewWidget
+          symbol="NASDAQ:AAPL"
+          locale="fr"
+          width="980"
+          height="610"
+        />
+      </div>
+      <div class="functions">
+        <h1>Trade</h1>
+        <AddTrade />
+        <Sell />
+        <DisplayStock />
+      </div>
     </div>
   );
 };
