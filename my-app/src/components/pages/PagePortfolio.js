@@ -7,24 +7,36 @@ To include `sell` function under open positions
 */
 
 import React from "react";
-import OpenPos from "../OpenPos";
+import History from "../History";
 import DisplayPos from "../DisplayPos";
+import "./PagePortfolio.css";
 
 const Portfolio = () => {
   return (
-    <div
+    <div class="container">
+      <div class="wrapper1">
+        <h1 class="position">Positions</h1>
+        <div className="display">
+          <DisplayPos />
+        </div>
+      </div>
+      <div className="wrapper2">
+        <h1 class="history">History</h1>
+        <div className="historyfn">
+          <History />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Portfolio;
+
+/*
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         height: "90vh",
       }}
-    >
-      <h1>Portfolio</h1>
-      <DisplayPos />
-      <OpenPos />
-    </div>
-  );
-};
-
-export default Portfolio;
+*/
