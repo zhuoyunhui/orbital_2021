@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
 import { UserContext } from "../providers/UserProvider";
 import {auth} from "../config/firebase";
-import AddTrade from "./Trade";
-import OpenPos from "./OpenPos";
-import Sell from "./Sell";
+import History from "./History";
 import DisplayPos from "./DisplayPos";
-import DisplayStock from "./StockPage";
+import Trade from "./PageTrade";
+
 
 
 const ProfilePage = () => {
     const user = useContext(UserContext);
     const {photoURL, displayName, email, availBalance, unrealisedBalance } = user;
     console.log(user);
-  
+
+    
     return (
       <div className = "mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
         <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
@@ -32,11 +32,10 @@ const ProfilePage = () => {
         </div>
         <div className = "unrBal">Unrealised Balance: {unrealisedBalance}</div>
         <div className = "availBal">Available Balance: {availBalance}</div>
-          <AddTrade/>
-          <Sell/>
+          <Trade/>
           <DisplayPos/>
-          <OpenPos/>
-          <DisplayStock/>
+          <History/>
+          <button className = "signout" onClick = {() => {auth.signOut()}}>Sign out</button>
       </div>
     ) 
   };
