@@ -6,7 +6,7 @@ To include 'trade now!' button that creates a pop-up window
     2) Firestore to update the trade records & retrieve userID data 
 */
 
-import AddTrade from "../Trade";
+import Buy from "../Buy";
 import Sell from "../Sell";
 import DisplayStock from "../StockPage";
 import TradingViewWidget, { Themes } from "react-tradingview-widget";
@@ -28,7 +28,7 @@ const Trade = () => {
       </div>
       <div class="functions">
         <h1>Trade</h1>
-        <AddTrade />
+        <Buy />
         <Sell />
         <DisplayStock />
       </div>
