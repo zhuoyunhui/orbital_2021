@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../providers/UserProvider";
 import { auth } from "../config/firebase";
-import AddTrade from "./Trade";
+import Buy from "./Buy";
 import OpenPos from "./OpenPos";
 import Sell from "./Sell";
 import DisplayPos from "./DisplayPos";
@@ -35,7 +35,7 @@ const ProfilePage = () => {
       </div>
       <div className="unrBal">Unrealised Balance: {unrealisedBalance}</div>
       <div className="availBal">Available Balance: {availBalance}</div>
-      <AddTrade />
+      <Buy />
       <Sell />
       <DisplayPos />
       <OpenPos />
