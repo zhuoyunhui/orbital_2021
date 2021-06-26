@@ -5,31 +5,38 @@ To include 'trade now!' button that creates a pop-up window
     1) Tradingview / alpha vantage(?) API to retrieve real time stock price 
     2) Firestore to update the trade records & retrieve userID data 
 */
-
+import React, { useState, useContext } from "react";
+import { UserContext } from "../providers/UserProvider";
 import Buy from "../Buy";
 import Sell from "../Sell";
 import DisplayStock from "../StockPage";
-import TradingViewWidget, { Themes } from "react-tradingview-widget";
-import React from "react";
+import TradingView from "../TradingView";
 import "./PageTrade.css";
 
+
 const Trade = () => {
+  const user = useContext(UserContext);
+  const [ticker, setTicker] = useState("aapl");
+
+  const handleInputChange = (event) => {
+    setTicker(event.target.value);
+  };
   return (
     <div class = "wrapper" style={{
           justifyContent: "center",
         }}>
-      <div class="widget">
-        <TradingViewWidget
-          symbol="NASDAQ:AAPL"
-          locale="fr"
-          width="980"
-          height="610"
-        />
-      </div>
+      <label htmlFor="ticker">ticker: </label>
+      <select value={ticker} onChange={handleInputChange} name="ticker">
+        <option value="aapl">AAPL</option>
+        <option value="amzn">AMZN</option>
+        <option value="gme">GME</option>
+        <option value="tsla">TSLA</option>
+      </select>
       <div class="functions">
         <h1>Trade</h1>
-        <Buy />
-        <Sell />
+        <Buy ticker={ticker} />
+        <Sell ticker={ticker}/>
+        <TradingView ticker={ticker}/>
         <DisplayStock />
       </div>
     </div>
