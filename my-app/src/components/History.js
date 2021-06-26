@@ -20,43 +20,74 @@ funtions:
 - stockPrice() : retrive real time stock market price for a given ticker 
 */
 
-import { useState, useEffect, useContext } from "react";
-import { firestore } from "../config/firebase";
-import { UserContext } from "../providers/UserProvider";
-import "./Tables.css";
-
 function History() {
   const user = useContext(UserContext);
-  const [trades, setTrades] = useState([]); //create state to store data
+  const [buys, setBuys] = useState([]);
+  const [sells, setSells] = useState([]);
 
   useEffect(() => {
     firestore
       .collection("trades")
       .where("userID", "==", user.email)
+      .where("type", "==", "buy")
       .onSnapshot((snapshot) => {
-        setTrades(snapshot.docs.map((doc) => doc.data()));
+        setBuys(snapshot.docs.map((doc) => doc.data()));
+      });
+    firestore
+      .collection("trades")
+      .where("userID", "==", user.email)
+      .where("type", "==", "sell")
+      .onSnapshot((snapshot) => {
+        setSells(snapshot.docs.map((doc) => doc.data()));
       });
   }, []);
 
   return (
-    <table class="OpenTable">
-      <thead>
-        <tr>
-          <th>ticker</th>
-          <th>quantity</th>
-          <th>entry price</th>
-        </tr>
-      </thead>
-      <tbody>
-        {trades.map((vari) => (
+    <div className="History">
+      <h3>Trade History</h3>
+      <h4>Buys</h4>
+      <table class="OpenTable">
+        <thead>
           <tr>
-            <td>{vari.ticker}</td>
-            <td>{vari.quantity}</td>
-            <td>{vari.entPrice}</td>
+            <th>ticker</th>
+            <th>quantity</th>
+            <th>entry price</th>
+            <th>transaction time</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {buys.map((buy) => (
+            <tr>
+              <td>{buy.ticker}</td>
+              <td>{buy.quantity}</td>
+              <td>{buy.entPrice}</td>
+              <td>{buy.transactionTime}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h4>Sells</h4>
+      <table class="OpenTable">
+        <thead>
+          <tr>
+            <th>ticker</th>
+            <th>quantity</th>
+            <th>entry price</th>
+            <th>transaction time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sells.map((sell) => (
+            <tr>
+              <td>{sell.ticker}</td>
+              <td>{sell.quantity}</td>
+              <td>{sell.entPrice}</td>
+              <td>{sell.transactionTime}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
