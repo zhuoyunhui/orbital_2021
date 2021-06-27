@@ -6,15 +6,16 @@
 */
 
 .wrapper {
-  padding-top: 40px;
-  display: flex;
+    padding-top:40px;
+    display: flex;
 }
 
 .widget {
-  flex: 1;
-  border: 2px;
-}
+    flex: 1;
+    border: 2px;
+}  
 
 .functions {
-  margin-right: 40px;
-}
+    margin-right: 40px;
+} 
+
