@@ -48,7 +48,7 @@ function History() {
     <div className="History">
       <h3>Trade History</h3>
       <h4>Buys</h4>
-      <table class="BuyTable">
+      <table class="OpenTable">
         <thead>
           <tr>
             <th>ticker</th>
@@ -69,7 +69,7 @@ function History() {
         </tbody>
       </table>
       <h4>Sells</h4>
-      <table class="SellTable">
+      <table class="OpenTable">
         <thead>
           <tr>
             <th>ticker</th>

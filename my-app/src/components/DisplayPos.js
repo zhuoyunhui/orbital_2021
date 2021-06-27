@@ -15,25 +15,22 @@ function DisplayPos() {
       });
   }, []);
   return (
-    <div className="DisplayPos">
-      <h3>Current Positions</h3>
-      <table class="DisplayTable">
-        <thead>
+    <table class="DisplayTable">
+      <thead>
+        <tr>
+          <th>ticker</th>
+          <th>quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {positions.map((vari) => (
           <tr>
-            <th>ticker</th>
-            <th>quantity</th>
+            <td>{vari.ticker}</td>
+            <td>{vari.quantity}</td>
           </tr>
-        </thead>
-        <tbody>
-          {positions.map((vari) => (
-            <tr>
-              <td>{vari.ticker}</td>
-              <td>{vari.quantity}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
