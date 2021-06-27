@@ -1,12 +1,5 @@
 /*
 display a list of all opened positions
-funtions:
-- sell() : update user info collected from the form to Firestore 
-    - make changes to available balance based on the price from stockPrice()
-    - remove trade info from user 
-    - update trade history for user 
-- stockPrice() : retrive real time stock market price for a given ticker 
-*/
 
 /*
 display a list of all opened positions
@@ -21,6 +14,7 @@ funtions:
 import { useState, useEffect, useContext } from "react";
 import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
+
 
 function History() {
   const user = useContext(UserContext);
@@ -94,17 +88,22 @@ function History() {
 }
 
 export default History;
+
+
 /*
-{
-    trades.map((vari) => (
-        <div>
-            <h4>--</h4>
-            <h4>{vari.ticker}</h4>  
-            <h4>{vari.entPrice}</h4>
-            <h4>{vari.quantity}</h4>
-            <h4>{vari.type}</h4>
-            <h4>--</h4>
-        </div>
-    ))
-}
-*/
+useEffect(() => {
+        firestore.collection('trades')
+            .get()
+            .then(snapshot => {
+                const trades = []
+                snapshot.forEach(doc => {
+                    const data = doc.data()
+                    trades.push(data)
+                })
+                t
+            })
+            .catch(error => console.log(error))
+    }
+
+    );
+
