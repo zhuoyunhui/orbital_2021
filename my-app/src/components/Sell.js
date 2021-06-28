@@ -43,7 +43,7 @@ function Sell({ ticker }) {
                     ),
                   });
                 /* delete document if quantity = 0 */
-                if (quantity == currQty) {
+                if (quantity === currQty) {
                   firestore
                     .collection("positions")
                     .doc(user.email + " " + ticker)

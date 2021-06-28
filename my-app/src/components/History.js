@@ -36,7 +36,7 @@ function History() {
       .onSnapshot((snapshot) => {
         setSells(snapshot.docs.map((doc) => doc.data()));
       });
-  }, []);
+  });
 
   return (
     <div className="History">
@@ -104,6 +104,4 @@ useEffect(() => {
     }
 
     );
-*/
-
 */

@@ -13,8 +13,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const user = useContext(UserContext);
-  const { photoURL, displayName, email, availBalance, unrealisedBalance } =
-    user;
+  const {
+    photoURL,
+    displayName,
+    email,
+    availBalance,
+  } = user; //removed unrealised Balance from para
   console.log(user);
   const classes = useStyles();
 

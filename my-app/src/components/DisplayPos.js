@@ -14,7 +14,7 @@ function DisplayPos() {
       .onSnapshot((snapshot) => {
         setPositions(snapshot.docs.map((doc) => doc.data()));
       });
-  }, []);
+  });
   return (
     <table class="DisplayTable">
       <thead>
@@ -36,4 +36,3 @@ function DisplayPos() {
 }
 
 export default DisplayPos;
-

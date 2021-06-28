@@ -1,4 +1,4 @@
-import TradingViewWidget, { Themes } from "react-tradingview-widget";
+import TradingViewWidget from "react-tradingview-widget"; //, { Themes }
 
 const TradingView = ({ ticker }) => {
   return (

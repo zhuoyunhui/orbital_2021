@@ -1,5 +1,5 @@
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
-import { Button, Box, Paper, Container } from "@material-ui/core";
+import { Button, Container } from "@material-ui/core"; //Box, Paper,
 import image from "../Images/img-01.png";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";

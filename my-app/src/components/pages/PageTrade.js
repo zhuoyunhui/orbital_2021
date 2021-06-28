@@ -7,7 +7,7 @@ To include 'trade now!' button that creates a pop-up window
 */
 // import DisplayStock from "../StockPage";
 import React, { useState, useContext } from "react";
-import { UserContext } from "../UserProvider.jsx";
+// import { UserContext } from "../UserProvider.jsx";
 import { Box } from "@material-ui/core";
 import TradingView from "../TradingView";
 import Sell from "../Sell";
@@ -15,7 +15,7 @@ import Buy from "../Buy";
 import "./PageTrade.css";
 
 const Trade = () => {
-  const user = useContext(UserContext);
+  // const user = useContext(UserContext);
   const [ticker, setTicker] = useState("aapl");
 
   const handleInputChange = (event) => {
