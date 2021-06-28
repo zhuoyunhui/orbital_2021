@@ -88,7 +88,6 @@ function History() {
 
 export default History;
 
-
 /*
 useEffect(() => {
         firestore.collection('trades')
@@ -107,3 +106,4 @@ useEffect(() => {
     );
 */
 
+*/
