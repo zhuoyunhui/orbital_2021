@@ -6,7 +6,7 @@ To include 'trade now!' button that creates a pop-up window
     2) Firestore to update the trade records & retrieve userID data 
 */
 // import DisplayStock from "../StockPage";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react"; //useContext
 // import { UserContext } from "../UserProvider.jsx";
 import { Box } from "@material-ui/core";
 import TradingView from "../TradingView";
