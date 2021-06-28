@@ -13,7 +13,6 @@
   width: 50%;
   padding: 5px;
 }
-
 @media screen and (max-width: 600px) {
   .position {
     width: 100%;
@@ -23,7 +22,6 @@
 /* .position {
   border: 2px;
 }
-
 .display {
   margin-right: 50px;
 } */
@@ -41,3 +39,4 @@
 .historyfn {
   margin-right: 50px;
 }
+

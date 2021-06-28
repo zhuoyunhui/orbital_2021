@@ -69,3 +69,4 @@ const getUserDocument = async (uid) => {
     console.error("Error fetching user", error);
   }
 };
+
