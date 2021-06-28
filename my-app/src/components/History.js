@@ -11,10 +11,10 @@ funtions:
 - stockPrice() : retrive real time stock market price for a given ticker 
 */
 
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
-
+import "./Tables.css";
 
 function History() {
   const user = useContext(UserContext);
@@ -40,15 +40,14 @@ function History() {
 
   return (
     <div className="History">
-      <h3>Trade History</h3>
       <h4>Buys</h4>
       <table class="OpenTable">
         <thead>
           <tr>
-            <th>ticker</th>
-            <th>quantity</th>
-            <th>entry price</th>
-            <th>transaction time</th>
+            <th>Ticker</th>
+            <th>Quantity</th>
+            <th>Entry Price</th>
+            <th>Time</th>
           </tr>
         </thead>
         <tbody>
@@ -66,10 +65,10 @@ function History() {
       <table class="OpenTable">
         <thead>
           <tr>
-            <th>ticker</th>
-            <th>quantity</th>
-            <th>entry price</th>
-            <th>transaction time</th>
+            <th>Ticker</th>
+            <th>Quantity</th>
+            <th>Exit Price</th>
+            <th>Time</th>
           </tr>
         </thead>
         <tbody>

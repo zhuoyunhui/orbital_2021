@@ -5,17 +5,33 @@
 }
 */
 
-.wrapper {
-    padding-top:40px;
-    display: flex;
+/* .wrapper {
+  padding-top: 40px;
+  display: flex;
 }
 
 .widget {
-    flex: 1;
-    border: 2px;
-}  
+  flex: 1;
+  border: 2px;
+}
 
 .functions {
-    margin-right: 40px;
-} 
+  margin-right: 40px;
+}
+ */
 
+@import url("https://fonts.googleapis.com/css2?family=Quantico&display=swap");
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0.8em;
+  margin-left: 2em;
+  padding-top: 1em;
+}
+
+h1,
+label {
+  font-family: "Quantico", sans-serif;
+  color: #1c2237;
+}

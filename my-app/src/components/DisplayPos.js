@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
+import "./Tables.css";
 
 function DisplayPos() {
   const user = useContext(UserContext);

@@ -5,15 +5,14 @@ To include 'trade now!' button that creates a pop-up window
     1) Tradingview / alpha vantage(?) API to retrieve real time stock price 
     2) Firestore to update the trade records & retrieve userID data 
 */
+// import DisplayStock from "../StockPage";
 import React, { useState, useContext } from "react";
-
-import { UserContext } from "../../providers/UserProvider";
-import Buy from "../Buy";
-import Sell from "../Sell";
-import DisplayStock from "../StockPage";
+import { UserContext } from "../UserProvider.jsx";
+import { Box } from "@material-ui/core";
 import TradingView from "../TradingView";
+import Sell from "../Sell";
+import Buy from "../Buy";
 import "./PageTrade.css";
-
 
 const Trade = () => {
   const user = useContext(UserContext);
@@ -23,22 +22,27 @@ const Trade = () => {
     setTicker(event.target.value);
   };
   return (
-    <div class = "wrapper" style={{
-          justifyContent: "center",
-        }}>
-      <label htmlFor="ticker">ticker: </label>
-      <select value={ticker} onChange={handleInputChange} name="ticker">
-        <option value="aapl">AAPL</option>
-        <option value="amzn">AMZN</option>
-        <option value="gme">GME</option>
-        <option value="tsla">TSLA</option>
-      </select>
-      <div class="functions">
-        <h1>Trade</h1>
-        <Buy ticker={ticker} />
-        <Sell ticker={ticker}/>
-        <TradingView ticker={ticker}/>
-        <DisplayStock />
+    <div class="wrapper">
+      <div className="widget">
+        <TradingView ticker={ticker} />
+      </div>
+      <div className="functions">
+        <Box pt={2} pb={3}>
+          <h1>Trade Now!</h1>
+        </Box>
+        <label htmlFor="ticker">Ticker: </label>
+        <select value={ticker} onChange={handleInputChange} name="ticker">
+          <option value="aapl">AAPL</option>
+          <option value="amzn">AMZN</option>
+          <option value="gme">GME</option>
+          <option value="tsla">TSLA</option>
+        </select>
+        <Box pt={3}>
+          <Buy ticker={ticker} />
+        </Box>
+        <Box pt={3}>
+          <Sell ticker={ticker} />
+        </Box>
       </div>
     </div>
   );

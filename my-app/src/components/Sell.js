@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
 import firebase from "firebase/app";
+import { Button } from "@material-ui/core";
 
 function Sell({ ticker }) {
   const user = useContext(UserContext);
@@ -9,7 +10,6 @@ function Sell({ ticker }) {
   const [quantity, setQuantity] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
-
 
   const handleInputChange = (event) => {
     setQuantity(event.target.value);
@@ -42,13 +42,13 @@ function Sell({ ticker }) {
                       quantity * -1
                     ),
                   });
-              /* delete document if quantity = 0 */
-              if (quantity == currQty) {
+                /* delete document if quantity = 0 */
+                if (quantity == currQty) {
                   firestore
                     .collection("positions")
                     .doc(user.email + " " + ticker)
                     .delete();
-              }
+                }
 
                 fetch(stockApi)
                   .then((res) => res.json())
@@ -64,24 +64,24 @@ function Sell({ ticker }) {
                       type: "sell",
                     };
                     firestore.collection("trades").add(data);
-                  
-                /* update users table */
-                firestore
-                  .collection("users")
-                  .doc(user.uid)
-                  .update({
-                    availBalance: firebase.firestore.FieldValue.increment(
-                      quantity * price
-                    ),
-                  })
-                  .then(() => {
-                    console.log("Sold Successfully.");
-                    setSubmitted(true);
-                  })
-                  .catch((e) => {
-                    console.log(e);
+
+                    /* update users table */
+                    firestore
+                      .collection("users")
+                      .doc(user.uid)
+                      .update({
+                        availBalance: firebase.firestore.FieldValue.increment(
+                          quantity * price
+                        ),
+                      })
+                      .then(() => {
+                        console.log("Sold Successfully.");
+                        setSubmitted(true);
+                      })
+                      .catch((e) => {
+                        console.log(e);
+                      });
                   });
-                });
               } else {
                 console.log("You have insufficient stock quantity.");
                 setError(true);
@@ -104,9 +104,15 @@ function Sell({ ticker }) {
       {error ? (
         <div>
           <h4>You have insufficient stock quantity.</h4>
-          <button className="btn-success" onClick={newSell}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            disableElevation
+            onClick={newSell}
+          >
             Sell
-          </button>
+          </Button>
         </div>
       ) : submitted ? (
         <div>
@@ -129,9 +135,16 @@ function Sell({ ticker }) {
               name="quantity"
             />
           </div>
-          <button onClick={SaveSell} classname="btn-success">
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            disableElevation
+            onClick={SaveSell}
+            classname="btn-success"
+          >
             Submit
-          </button>
+          </Button>
         </div>
       )}
     </div>

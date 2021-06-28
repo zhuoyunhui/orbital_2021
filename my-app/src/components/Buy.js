@@ -11,6 +11,7 @@ import React, { useState, useContext } from "react";
 import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
 import firebase from "firebase/app";
+import { Button } from "@material-ui/core";
 
 function Buy({ ticker }) {
   const user = useContext(UserContext);
@@ -140,9 +141,15 @@ function Buy({ ticker }) {
               name="quantity"
             />
           </div>
-          <button onClick={SaveTrade} classname="btn-success">
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            disableElevation
+            onClick={SaveTrade}
+          >
             Submit
-          </button>
+          </Button>
         </div>
       )}
     </div>
