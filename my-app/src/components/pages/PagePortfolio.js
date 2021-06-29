@@ -14,17 +14,13 @@ import "./PagePortfolio.css";
 const Portfolio = () => {
   return (
     <div class="container">
-      <div class="wrapper1">
-        <h1 class="position">Positions</h1>
-        <div className="display">
-          <DisplayPos />
-        </div>
+      <h1 class="position"> Open Positions</h1>
+      <div className="display">
+        <DisplayPos />
       </div>
-      <div className="wrapper2">
-        <h1 class="history">History</h1>
-        <div className="historyfn">
-          <History />
-        </div>
+      <h1 class="history"> Trade History</h1>
+      <div className="historyfn">
+        <History />
       </div>
     </div>
   );

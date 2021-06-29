@@ -1,13 +1,20 @@
 import { IfFirebaseAuthed, IfFirebaseUnAuthed } from "@react-firebase/auth";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import Home from "./components/pages/PageHome";
+import Home from "./components/PageHome";
 import Trade from "./components/pages/PageTrade";
 import Portfolio from "./components/pages/PagePortfolio";
 import Profile from "./components/pages/PageProfile";
-import Login from "./components/pages/PageLogin";
+import LogOut from "./components/pages/PageLogOut";
 import "./App.css";
 import UserProvider from "./providers/UserProvider";
+import PageAuth from "./components/pages/PageLogin";
+
+// var rootStyle = {
+//   backgroundColor: "green",
+//   color: "green",
+//   height: "100vh",
+// };
 
 function App() {
   return (
@@ -22,13 +29,13 @@ function App() {
                 <Route path="/trade" component={Trade} />
                 <Route path="/portfolio" component={Portfolio} />
                 <Route path="/profile" component={Profile} />
-                <Route path="/login" component={Login} />
+                <Route path="/logout" component={LogOut} />
               </Switch>
             </Router>
           </UserProvider>
         </IfFirebaseAuthed>
         <IfFirebaseUnAuthed>
-          <h1 className="hi">hi</h1>
+          <PageAuth />
         </IfFirebaseUnAuthed>
       </div>
     </>

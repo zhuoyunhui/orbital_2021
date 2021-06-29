@@ -1,4 +1,4 @@
-import TradingViewWidget, { Themes } from "react-tradingview-widget";
+import TradingViewWidget from "react-tradingview-widget"; //, { Themes }
 
 const TradingView = ({ ticker }) => {
   return (
@@ -8,9 +8,10 @@ const TradingView = ({ ticker }) => {
         justifyContent: "center",
       }}
     >
-      <div class="widget">
+      <div>
         <TradingViewWidget
           symbol={"NASDAQ:".concat(ticker)}
+          // theme={Themes.DARK}
           locale="fr"
           width="980"
           height="610"

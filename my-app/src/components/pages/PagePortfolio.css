@@ -1,42 +1,24 @@
-.contanier {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.container {
+  padding-left: 60px;
+}
+
+.position {
+  padding-top: 40px;
+}
+
+.history {
+  padding-top: 40px;
 }
 
 .wrapper1 {
   padding-top: 40px;
+  /* padding-left: 10%;
+  display: grid;
+  grid-template-columns: 0fr 0.9fr;
+  grid-gap: 0.1rem; */
 }
-
-/* .position {
-  float: left;
-  width: 50%;
-  padding: 5px;
-}
-@media screen and (max-width: 600px) {
-  .position {
-    width: 100%;
-  }
-} */
-
-/* .position {
-  border: 2px;
-}
-.display {
-  margin-right: 50px;
-} */
 
 .wrapper2 {
   padding-top: 40px;
   /* display: flex; */
 }
-
-.history {
-  flex: 1;
-  border: 2px;
-}
-
-.historyfn {
-  margin-right: 50px;
-}
-

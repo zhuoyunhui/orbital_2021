@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
+import "./Tables.css";
 
 function DisplayPos() {
   const user = useContext(UserContext);
@@ -13,7 +14,7 @@ function DisplayPos() {
       .onSnapshot((snapshot) => {
         setPositions(snapshot.docs.map((doc) => doc.data()));
       });
-  }, []);
+  });
   return (
     <table class="DisplayTable">
       <thead>
@@ -35,4 +36,3 @@ function DisplayPos() {
 }
 
 export default DisplayPos;
-
