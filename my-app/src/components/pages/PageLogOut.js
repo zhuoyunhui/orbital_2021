@@ -1,4 +1,5 @@
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
+import {auth} from "../../config/firebase";
 
 function SignOut() {
   const handleLogout = (firebase) => {
@@ -8,7 +9,7 @@ function SignOut() {
   return (
     <>
       <FirebaseAuthConsumer>
-        {({ firebase }) => handleLogout(firebase)}
+      <button className = "signout" onClick = {() => {auth.signOut()}}>Sign out</button>
       </FirebaseAuthConsumer>
     </>
   );
