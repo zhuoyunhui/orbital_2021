@@ -1,22 +1,31 @@
 import React, { useContext } from "react";
-import { Router } from "@reach/router";
-import SignIn from "./Signin";
-import SignUp from "./Signup";
-import ProfilePage from "./Profile";
-import PasswordReset from "./Passwordreset";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Navbar from "./Navbar/Navbar";
+import Home from "./PageHome";
+import Trade from "./pages/PageTrade";
+import Portfolio from "./pages/PagePortfolio";
+import Profile from "./pages/PageProfile";
+import LogOut from "./pages/PageLogOut";
+import PageAuth from "./pages/PageLogin";
 import { UserContext } from "../providers/UserProvider";
+
 
 function Application() {
   const user = useContext(UserContext);
   return (
         user ?
-        <ProfilePage />
-      :
         <Router>
-          <SignUp path="signUp" />
-          <SignIn path="/" />
-          <PasswordReset path = "passwordReset" />
+          <Navbar />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/trade" component={Trade} />
+            <Route path="/portfolio" component={Portfolio} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/logout" component={LogOut} />
+          </Switch>
         </Router>
+      :
+        <PageAuth />
 
   );
 }
