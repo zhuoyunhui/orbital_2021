@@ -12,6 +12,7 @@ import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
 import firebase from "firebase/app";
 import { Button } from "@material-ui/core";
+import { Stockprice } from "./Stockprice";
 
 function Buy({ ticker }) {
   const user = useContext(UserContext);
@@ -34,76 +35,67 @@ function Buy({ ticker }) {
     setTrade({ ...trade, [name]: value });
   };
 
-  const SaveTrade = () => {
-    const stockApi = `https://cloud.iexapis.com/stable/stock/${trade.ticker}/quote/latestPrice?token=pk_0705469d87aa4650835b7e7c86e61296`;
+  const SaveTrade = async () => {
+    const price = await Stockprice(ticker);
+    var data = {
+      tradeID: user.email + " @ " + new Date().toLocaleString(),
+      transactionTime: new Date().toLocaleString(),
+      ticker: ticker,
+      quantity: parseInt(trade.quantity, 10),
+      entPrice: price,
+      userID: trade.userID,
+      type: "buy",
+    };
 
-    fetch(stockApi)
-      .then((res) => res.json())
-      .then((price) => {
-        var data = {
-          tradeID: user.email + " @ " + new Date().toLocaleString(),
-          transactionTime: new Date().toLocaleString(),
-          ticker: ticker,
-          quantity: parseInt(trade.quantity, 10),
-          entPrice: price,
-          userID: trade.userID,
-          type: "buy",
-        };
+    const sufficientBal = user.availBalance >= data.quantity * data.entPrice;
 
-        const sufficientBal =
-          user.availBalance >= data.quantity * data.entPrice;
+    if (sufficientBal) {
+      /* update trades table */
+      firestore.collection("trades").add(data);
 
-        if (sufficientBal) {
-          /* update trades table */
-          firestore.collection("trades").add(data);
+      /* update users table (update urlBalance when we get real-time data)*/
+      firestore
+        .collection("users")
+        .doc(user.uid)
+        .update({
+          availBalance: user.availBalance - data.quantity * data.entPrice,
+        });
 
-          /* update users table (update urlBalance when we get real-time data)*/
-          firestore
-            .collection("users")
-            .doc(user.uid)
-            .update({
-              availBalance: user.availBalance - data.quantity * data.entPrice,
-            });
+      /* update positions table */
+      const pdoc = await firestore
+        .collection("positions")
+        .doc(user.email + " " + data.ticker)
+        .get();
+      if (pdoc.exists) {
+        /* update avgPrice (NOT TESTED) */
+        const pdata = pdoc.data();
+        console.log(pdata);
+        const newAvg = ((pdata.quantity * pdata.avgPrice) + (data.quantity * data.entPrice))/(pdata.quantity + data.quantity);
+        firestore
+          .collection("positions")
+          .doc(user.email + " " + data.ticker)
+          .update({
+            quantity: firebase.firestore.FieldValue.increment(data.quantity),
+            avgPrice: newAvg
+          });
+      } else {
+        firestore
+          .collection("positions")
+          .doc(user.email + " " + data.ticker)
+          .set({
+            userID: user.email,
+            ticker: data.ticker,
+            quantity: parseInt(data.quantity, 10),
+            avgPrice: data.entPrice,
+          });
+      }
+      console.log("Traded Successfully.");
+      setSubmitted(true);
 
-          /* update positions table */
-          firestore
-            .collection("positions")
-            .where("ticker", "==", data.ticker)
-            .where("userID", "==", user.email)
-            .get()
-            .then((snapshot) => {
-              if (!snapshot.empty) {
-                firestore
-                  .collection("positions")
-                  .doc(user.email + " " + data.ticker)
-                  .update({
-                    quantity: firebase.firestore.FieldValue.increment(
-                      data.quantity
-                    ),
-                  });
-              } else {
-                firestore
-                  .collection("positions")
-                  .doc(user.email + " " + data.ticker)
-                  .set({
-                    userID: user.email,
-                    ticker: data.ticker,
-                    quantity: parseInt(data.quantity, 10),
-                  });
-              }
-            })
-            .then(() => {
-              console.log("Traded Successfully.");
-              setSubmitted(true);
-            })
-            .catch((e) => {
-              console.log(e);
-            });
-        } else {
-          console.log("Not enough Balance.");
-          setError(true);
-        }
-      });
+    } else {
+      console.log("Not enough Balance.");
+      setError(true);
+    }
   };
 
   const newTrade = () => {
@@ -111,6 +103,7 @@ function Buy({ ticker }) {
     setSubmitted(false);
     setError(false);
   };
+
   return (
     <div className="submit-form">
       {error ? (

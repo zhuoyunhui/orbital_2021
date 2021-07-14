@@ -1,26 +1,46 @@
 import { useState, useEffect, useContext } from "react";
 import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
+import { Stockprice } from "./Stockprice";
 import "./Tables.css";
 
 function DisplayPos() {
   const user = useContext(UserContext);
-  const [positions, setPositions] = useState([]); //create state to store data
+  var pposition = [];
+  const [positions,setPositions] = useState([]);
+  
 
   useEffect(() => {
-    firestore
+    async function display() {
+    const querySnapshot = await firestore
       .collection("positions")
       .where("userID", "==", user.email)
-      .onSnapshot((snapshot) => {
-        setPositions(snapshot.docs.map((doc) => doc.data()));
-      });
-  });
+      .get();
+
+      for (const doc of querySnapshot.docs) {
+        const data = doc.data();
+        const price = await Stockprice(data.ticker); 
+        pposition.push({...doc.data(), 
+          currPrice:price, 
+          urlPnL: ((price - data.avgPrice) * data.quantity).toFixed(2),
+          percentagePnL: (((price - data.avgPrice) / data.avgPrice) * 100).toFixed(2)
+        });
+      }
+      setPositions(pposition);
+    }
+    display();
+  },[]);
+
   return (
     <table class="DisplayTable">
       <thead>
         <tr>
           <th>ticker</th>
           <th>quantity</th>
+          <th>average price</th>
+          <th>latest price</th>
+          <th>unrealised PnL</th>
+          <th>% PnL</th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +48,10 @@ function DisplayPos() {
           <tr>
             <td>{vari.ticker}</td>
             <td>{vari.quantity}</td>
+            <td>{vari.avgPrice}</td>
+            <td>{vari.currPrice}</td>
+            <td>{vari.urlPnL}</td>
+            <td>{vari.percentagePnL}</td>
           </tr>
         ))}
       </tbody>
