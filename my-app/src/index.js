@@ -5,6 +5,7 @@ import { FirebaseAuthProvider } from "@react-firebase/auth";
 import { config } from "./config/firebase";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
+import 'semantic-ui-css/semantic.min.css'
 
 ReactDOM.render(
   <React.StrictMode>

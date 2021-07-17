@@ -1,19 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Quantico&display=swap");
+
 .navbar {
   background: #1c2237;
-  /* background: #413f3d; */
-  /* background: #1557a8; */
-  /* background: #372c2e; */
-
   height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
+  font-family: "Quantico", sans-serif;
   position: sticky;
   top: 0;
   z-index: 999;
 }
-
 .navbar-container {
   display: flex;
   justify-content: space-between;
