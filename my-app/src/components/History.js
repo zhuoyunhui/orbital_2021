@@ -68,6 +68,8 @@ function History() {
             <th>Ticker</th>
             <th>Quantity</th>
             <th>Exit Price</th>
+            <th>Realised PnL</th>
+            <th>% PnL</th>
             <th>Time</th>
           </tr>
         </thead>
@@ -77,6 +79,8 @@ function History() {
               <td>{sell.ticker}</td>
               <td>{sell.quantity}</td>
               <td>{sell.entPrice}</td>
+              <td>{sell.realisedPnL}</td>
+              <td>{sell.percentagePnL}</td>
               <td>{sell.transactionTime}</td>
             </tr>
           ))}

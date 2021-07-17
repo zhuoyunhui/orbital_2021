@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../providers/UserProvider";
 import { makeStyles } from "@material-ui/core/styles";
+import UnrealisedBal from "./UnrealisedBal";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -13,12 +14,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const user = useContext(UserContext);
+  UnrealisedBal(user);
   const {
     photoURL,
     displayName,
     email,
     availBalance,
-  } = user; //removed unrealised Balance from para
+    unrealisedBalance
+  } = user;
   console.log(user);
   const classes = useStyles();
 
@@ -43,8 +46,8 @@ const Home = () => {
             <h3 className="italic">{email}</h3>
           </div>
         </div>
-        {/* <div className="unrBal">Unrealised Balance: {unrealisedBalance}</div> */}
         <div className="availBal">Available Balance: {availBalance}</div>
+        <UnrealisedBal />
       </div>
     </div>
   );

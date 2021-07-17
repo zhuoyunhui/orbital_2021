@@ -3,6 +3,7 @@ import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
 import firebase from "firebase/app";
 import { Button } from "@material-ui/core";
+import { Stockprice } from "./Stockprice";
 
 function Sell({ ticker }) {
   const user = useContext(UserContext);
@@ -15,83 +16,71 @@ function Sell({ ticker }) {
     setQuantity(event.target.value);
   };
 
-  const SaveSell = () => {
-    const stockApi = `https://cloud.iexapis.com/stable/stock/${ticker}/quote/latestPrice?token=pk_0705469d87aa4650835b7e7c86e61296`;
-    console.log(ticker);
-    firestore
+  const SaveSell = async () => {
+    const sdoc = await firestore
       .collection("positions")
-      .where("ticker", "==", ticker)
-      .where("userID", "==", user.email)
-      .get()
-      .then((doc) => {
-        if (!doc.empty) {
-          /* find current quantity*/
+      .doc(user.email + " " + ticker)
+      .get();
+
+    if (sdoc.exists) {
+      /* find current quantity*/
+      const sdata = sdoc.data();
+      /* delete document if quantity = 0 */
+      if (quantity > sdata.quantity) {
+        console.log("You have insufficient stock quantity.");
+        setError(true);
+      } else {
+        if (quantity == sdata.quantity) {
+          await firestore
+            .collection("positions")
+            .doc(user.email + " " + ticker)
+            .delete();
+        } else {
+          /* update positions table */
           firestore
             .collection("positions")
             .doc(user.email + " " + ticker)
-            .get()
-            .then((doc) => {
-              const currQty = doc.data().quantity;
-              if (quantity <= currQty) {
-                /* update positions table */
-                firestore
-                  .collection("positions")
-                  .doc(user.email + " " + ticker)
-                  .update({
-                    quantity: firebase.firestore.FieldValue.increment(
-                      quantity * -1
-                    ),
-                  });
-                /* delete document if quantity = 0 */
-                if (quantity === currQty) {
-                  firestore
-                    .collection("positions")
-                    .doc(user.email + " " + ticker)
-                    .delete();
-                }
-
-                fetch(stockApi)
-                  .then((res) => res.json())
-                  .then((price) => {
-                    /* update trades table */
-                    var data = {
-                      tradeID: user.email + " @ " + new Date().toLocaleString(),
-                      transactionTime: new Date().toLocaleString(),
-                      ticker: ticker,
-                      quantity: parseInt(quantity, 10),
-                      entPrice: price,
-                      userID: user.email,
-                      type: "sell",
-                    };
-                    firestore.collection("trades").add(data);
-
-                    /* update users table */
-                    firestore
-                      .collection("users")
-                      .doc(user.uid)
-                      .update({
-                        availBalance: firebase.firestore.FieldValue.increment(
-                          quantity * price
-                        ),
-                      })
-                      .then(() => {
-                        console.log("Sold Successfully.");
-                        setSubmitted(true);
-                      })
-                      .catch((e) => {
-                        console.log(e);
-                      });
-                  });
-              } else {
-                console.log("You have insufficient stock quantity.");
-                setError(true);
-              }
+            .update({
+              quantity: firebase.firestore.FieldValue.increment(quantity * -1),
             });
-        } else {
-          console.log("You have insufficient stock quantity.");
-          setError(true);
         }
-      });
+
+        const price = await Stockprice(ticker);
+        /* update trades table */
+        var data = {
+          tradeID: user.email + " @ " + new Date().toLocaleString(),
+          transactionTime: new Date().toLocaleString(),
+          ticker: ticker,
+          quantity: parseInt(quantity, 10),
+          entPrice: price,
+          userID: user.email,
+          realisedPnL: ((sdata.avgPrice - price) * sdata.quantity).toFixed(2),
+          percentagePnL: (((sdata.avgPrice - price) / price) * 100).toFixed(2),
+          type: "sell"
+        };
+        firestore.collection("trades").add(data);
+
+        /* update users table */
+        firestore
+          .collection("users")
+          .doc(user.uid)
+          .update({
+            availBalance: firebase.firestore.FieldValue.increment(
+              quantity * price
+            ),
+          })
+          .then(() => {
+            console.log("Sold Successfully.");
+            setSubmitted(true);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
+    } else {
+      console.log("You have insufficient stock quantity.");
+      setError(true);
+    }
   };
 
   const newSell = () => {
@@ -99,6 +88,7 @@ function Sell({ ticker }) {
     setSubmitted(false);
     setError(false);
   };
+
   return (
     <div className="submit-form">
       {error ? (

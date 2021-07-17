@@ -1,3 +1,4 @@
+/*
 import { IfFirebaseAuthed, IfFirebaseUnAuthed } from "@react-firebase/auth";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
@@ -43,18 +44,18 @@ function App() {
 }
 
 export default App;
+*/
 
-// import React from "react";
-// import Application from "./components/Application";
-// import UserProvider from "./providers/UserProvider";
-// import Navbar from './components/Navbar'
+import React from "react";
+import Application from "./components/Application";
+import UserProvider from "./providers/UserProvider";
 
-// function App() {
-//   return (
-//     <UserProvider>
-//       <Application />
-//     </UserProvider>
-//   );
-// }
-// export default App;
+function App() {
+  return (
+  <UserProvider>
+    <Application />
+  </UserProvider>
+  );
+}
+export default App;
 
