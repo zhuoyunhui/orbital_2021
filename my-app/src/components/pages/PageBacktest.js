@@ -1,12 +1,10 @@
 // performance dashboard
 import React, { useState, useEffect } from "react";
-import { TickerForm } from "../api/Form"
-import { Container } from 'semantic-ui-react'
+import { TickerForm } from "../api/Form";
+import { Container, Grid } from "semantic-ui-react";
 import "./PageBacktest.css";
 
-
 const PageBacktest = () => {
-
   const [stocks, setStocks] = useState();
   const [date, setDate] = useState();
   const [sample_size, setSample_size] = useState();
@@ -18,6 +16,7 @@ const PageBacktest = () => {
   const [maxReturn, setMaxReturn] = useState();
   const [maxLoss, setMaxLoss] = useState();
   const [totalReturn, setTotalReturn] = useState(0);
+  const [command, setCommand] = useState([]);
 
   // TickerForm: User input of ticker
   const [ticker, setTicker] = useState();
@@ -45,25 +44,39 @@ const PageBacktest = () => {
         setMaxReturn(data.Max_Return);
         setMaxLoss(data.Max_Loss);
         setTotalReturn(data.Total_return);
+        setCommand(data.Command);
       });
   }, [ticker, day, month, year]);
 
   return (
-      <>
-      <Container>
+    <>
+      <Container style={{ marginTop: 40 }}>
         <TickerForm
-                    onData={(ticker) => {
-                    setTicker(ticker["stock"]);
-                    setDay(ticker["day"]);
-                    setMonth(ticker["month"]);
-                    setYear(ticker["year"]);
-                    }}
-                />
-            <div className="App">
+          onData={(ticker) => {
+            setTicker(ticker["stock"]);
+            setDay(ticker["day"]);
+            setMonth(ticker["month"]);
+            setYear(ticker["year"]);
+          }}
+        />
+        <Grid divided="vertically" style={{ marginTop: 20 }}>
+          <Grid.Row columns={2}>
+            <Grid.Column>
+              <div className="command">
+                <p>
+                  {command.map((cmd) => (
+                    <p>{cmd}, </p>
+                  ))}
+                  .
+                </p>
+              </div>
+            </Grid.Column>
+            <Grid.Column>
+              <div className="analysis">
                 <p>The stock is {stocks}.</p>
                 <p>The date is {date}.</p>
                 <p>The sample_size is {sample_size}.</p>
-                <p>The EMAs used is {emaused}.</p>
+                <p>The EMAs used is {emaused}. </p>
                 <p>The batting_Avg is {batting_Avg}.</p>
                 <p>The gainLossRatio used is {gainLossRatio}.</p>
                 <p>The average gain is {averageGain}.</p>
@@ -71,10 +84,12 @@ const PageBacktest = () => {
                 <p>The maxReturn is {maxReturn}.</p>
                 <p>The maxLoss is {maxLoss}.</p>
                 <p>The totalReturn is {totalReturn}.</p>
-            </div>
+              </div>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </Container>
-        
-      </>
+    </>
   );
 };
 

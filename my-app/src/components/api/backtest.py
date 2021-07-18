@@ -12,7 +12,8 @@ def backtesting(ticker, day, month, year):
     startyear = int(year)
     startmonth = int(month)
     startday = int(day)
-
+    command = [];
+    
     start = dt.datetime(startyear, startmonth, startday)
 
     now = dt.datetime.now()
@@ -40,24 +41,30 @@ def backtesting(ticker, day, month, year):
         close = df["Adj Close"][i]
 
         if(cmin > cmax):
-            print("Red White Blue")
+            # print("Red White Blue")
+            command.append("Red White Blue")
             if(pos == 0):
                 bp = close
                 pos = 1
-                print("Buying now at "+str(bp))
+                # print("Buying now at "+str(bp))
+                command.append("Buying now at "+str(bp))
 
         elif(cmin < cmax):
-            print("Blue White Red")
+            # print("Blue White Red")
+            command.append("Blue White Red")
             if(pos == 1):
                 pos = 0
                 sp = close
-                print("Selling now at "+str(sp))
+                # print("Selling now at "+str(sp))
+                command.append("Selling now at "+str(sp))
                 pc = (sp/bp-1)*100
                 percentchange.append(pc)
+                
         if(num == df["Adj Close"].count()-1 and pos == 1):
             pos = 0
             sp = close
-            print("Selling now at "+str(sp))
+            # print("Selling now at "+str(sp))
+            command.append("Selling now at "+str(sp))
             pc = (sp/bp-1)*100
             percentchange.append(pc)
 
@@ -113,6 +120,7 @@ def backtesting(ticker, day, month, year):
                'Average_Loss': avgLoss,
                'Max_Return': maxR,
                'Max_Loss': maxL,
-               'Total_return': totalR}
+               'Total_return': totalR,
+               'Command': command}
 
     return results

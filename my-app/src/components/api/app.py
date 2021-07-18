@@ -15,7 +15,6 @@ def ticker():
 
 # This posts the backtesting(ticker) result to /bacltest?ticker=ticker
 
-
 @ app.route('/backtest', methods=['POST', 'GET'])
 def backtest():
     response = jsonify(message="Simple server is running")
