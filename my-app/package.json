@@ -12,6 +12,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "eslint-config-react-app": "^6.0.0",
     "firebase": "^8.6.2",
     "firebase-admin": "^9.9.0",
     "lodash": "4.17.21",
@@ -55,5 +56,10 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-jest": "^24.3.6"
+  }
 }
