@@ -40,7 +40,7 @@ function History() {
 
   return (
     <div className="History">
-      <h4>Buys</h4>
+      <h4 style={{ fontFamily: "Quantico" }}>Buys</h4>
       <table class="OpenTable">
         <thead>
           <tr>
@@ -61,7 +61,7 @@ function History() {
           ))}
         </tbody>
       </table>
-      <h4>Sells</h4>
+      <h4 style={{ fontFamily: "Quantico" }}> Sells</h4>
       <table class="OpenTable">
         <thead>
           <tr>

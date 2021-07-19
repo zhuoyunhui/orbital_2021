@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
 import firebase from "firebase/app";
-import { Button } from "@material-ui/core";
+import { Button, Grid } from "semantic-ui-react";
 import { Stockprice } from "./Stockprice";
 
 function Sell({ ticker }) {
@@ -56,7 +56,7 @@ function Sell({ ticker }) {
           userID: user.email,
           realisedPnL: ((sdata.avgPrice - price) * sdata.quantity).toFixed(2),
           percentagePnL: (((sdata.avgPrice - price) / price) * 100).toFixed(2),
-          type: "sell"
+          type: "sell",
         };
         firestore.collection("trades").add(data);
 
@@ -93,26 +93,22 @@ function Sell({ ticker }) {
     <div className="submit-form">
       {error ? (
         <div>
-          <h4>You have insufficient stock quantity.</h4>
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            disableElevation
-            onClick={newSell}
-          >
+          <h3 style={{ fontFamily: "Quantico" }}>
+            You have insufficient stock quantity.
+          </h3>
+          <Button size="mini" compact onClick={newSell}>
             Sell
           </Button>
         </div>
       ) : submitted ? (
         <div>
-          <h4>Sold Successfully.</h4>
-          <button className="btn-success" onClick={newSell}>
-            Sell
-          </button>
+          <h4 style={{ fontFamily: "Quantico" }}>Sold Successfully.</h4>
+          <Button size="mini" compact onClick={newSell}>
+            Sell Again
+          </Button>
         </div>
       ) : (
-        <div>
+        <Grid>
           <div className="form-group">
             <label htmlFor="quantity">Sell (quantity): </label>
             <input
@@ -126,16 +122,14 @@ function Sell({ ticker }) {
             />
           </div>
           <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            disableElevation
+            size="mini"
+            compact
             onClick={SaveSell}
             classname="btn-success"
           >
             Submit
           </Button>
-        </div>
+        </Grid>
       )}
     </div>
   );

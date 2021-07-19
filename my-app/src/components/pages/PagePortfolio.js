@@ -10,19 +10,26 @@ import React from "react";
 import History from "../History";
 import DisplayPos from "../DisplayPos";
 import "./PagePortfolio.css";
+import { Container } from "semantic-ui-react";
 
 const Portfolio = () => {
   return (
-    <div class="container">
-      <h1 class="position"> Open Positions</h1>
-      <div className="display">
-        <DisplayPos />
+    <Container>
+      <div class="container">
+        <h1 class="position" style={{ fontFamily: "Quantico" }}>
+          Open Positions
+        </h1>
+        <div className="display">
+          <DisplayPos />
+        </div>
+        <h1 class="history" style={{ fontFamily: "Quantico" }}>
+          Trade History
+        </h1>
+        <div className="historyfn">
+          <History />
+        </div>
       </div>
-      <h1 class="history"> Trade History</h1>
-      <div className="historyfn">
-        <History />
-      </div>
-    </div>
+    </Container>
   );
 };
 
