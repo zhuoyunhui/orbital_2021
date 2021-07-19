@@ -6,7 +6,16 @@
   color: #1c2237;
 }
 
+.header {
+  font-family: "Quantico", sans-serif;
+  color: #1c2237;
+}
+
 .command {
-  height: 300px;
+  height: 270px;
   overflow: scroll;
+}
+
+.content {
+  padding: 2px;
 }
