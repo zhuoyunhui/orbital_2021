@@ -11,8 +11,9 @@ import React, { useState, useContext } from "react";
 import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
 import firebase from "firebase/app";
-import { Button } from "@material-ui/core";
+import { Button, Grid } from "semantic-ui-react";
 import { Stockprice } from "./Stockprice";
+import "./Buy.css";
 
 function Buy({ ticker }) {
   const user = useContext(UserContext);
@@ -70,13 +71,15 @@ function Buy({ ticker }) {
         /* update avgPrice (NOT TESTED) */
         const pdata = pdoc.data();
         console.log(pdata);
-        const newAvg = ((pdata.quantity * pdata.avgPrice) + (data.quantity * data.entPrice))/(pdata.quantity + data.quantity);
+        const newAvg =
+          (pdata.quantity * pdata.avgPrice + data.quantity * data.entPrice) /
+          (pdata.quantity + data.quantity);
         firestore
           .collection("positions")
           .doc(user.email + " " + data.ticker)
           .update({
             quantity: firebase.firestore.FieldValue.increment(data.quantity),
-            avgPrice: newAvg
+            avgPrice: newAvg,
           });
       } else {
         firestore
@@ -91,7 +94,6 @@ function Buy({ ticker }) {
       }
       console.log("Traded Successfully.");
       setSubmitted(true);
-
     } else {
       console.log("Not enough Balance.");
       setError(true);
@@ -108,20 +110,20 @@ function Buy({ ticker }) {
     <div className="submit-form">
       {error ? (
         <div>
-          <h4>Not enough balance.</h4>
-          <button className="btn-success" onClick={newTrade}>
+          <h4 style={{ fontFamily: "Quantico" }}>Not enough balance.</h4>
+          <Button size="mini" compact onClick={newTrade}>
             Buy
-          </button>
+          </Button>
         </div>
       ) : submitted ? (
         <div>
-          <h4>Traded Successfully.</h4>
-          <button className="btn-success" onClick={newTrade}>
-            Buy
-          </button>
+          <h4 style={{ fontFamily: "Quantico" }}>Traded Successfully.</h4>
+          <Button size="mini" compact onClick={newTrade}>
+            Buy Again
+          </Button>
         </div>
       ) : (
-        <div>
+        <Grid>
           <div className="form-group">
             <label htmlFor="quantity">Buy (quantity): </label>
             <input
@@ -134,16 +136,10 @@ function Buy({ ticker }) {
               name="quantity"
             />
           </div>
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            disableElevation
-            onClick={SaveTrade}
-          >
+          <Button size="mini" compact onClick={SaveTrade}>
             Submit
           </Button>
-        </div>
+        </Grid>
       )}
     </div>
   );

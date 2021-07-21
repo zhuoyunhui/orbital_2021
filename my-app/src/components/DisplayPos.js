@@ -7,29 +7,32 @@ import "./Tables.css";
 function DisplayPos() {
   const user = useContext(UserContext);
   var pposition = [];
-  const [positions,setPositions] = useState([]);
-  
+  const [positions, setPositions] = useState([]);
 
   useEffect(() => {
     async function display() {
-    const querySnapshot = await firestore
-      .collection("positions")
-      .where("userID", "==", user.email)
-      .get();
+      const querySnapshot = await firestore
+        .collection("positions")
+        .where("userID", "==", user.email)
+        .get();
 
       for (const doc of querySnapshot.docs) {
         const data = doc.data();
-        const price = await Stockprice(data.ticker); 
-        pposition.push({...doc.data(), 
-          currPrice:price, 
+        const price = await Stockprice(data.ticker);
+        pposition.push({
+          ...doc.data(),
+          currPrice: price,
           urlPnL: ((price - data.avgPrice) * data.quantity).toFixed(2),
-          percentagePnL: (((price - data.avgPrice) / data.avgPrice) * 100).toFixed(2)
+          percentagePnL: (
+            ((price - data.avgPrice) / data.avgPrice) *
+            100
+          ).toFixed(2),
         });
       }
       setPositions(pposition);
     }
     display();
-  },[]);
+  }, []);
 
   return (
     <table class="DisplayTable">

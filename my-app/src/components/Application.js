@@ -7,6 +7,7 @@ import Portfolio from "./pages/PagePortfolio";
 import Profile from "./pages/PageProfile";
 import LogOut from "./pages/PageLogOut";
 import PageAuth from "./pages/PageLogin";
+import Backtest from "./pages/PageBacktest"
 import { UserContext } from "../providers/UserProvider";
 
 
@@ -19,6 +20,7 @@ function Application() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/trade" component={Trade} />
+            <Route path="/backtest" component={Backtest} />
             <Route path="/portfolio" component={Portfolio} />
             <Route path="/profile" component={Profile} />
             <Route path="/logout" component={LogOut} />

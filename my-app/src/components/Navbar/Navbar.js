@@ -1,9 +1,12 @@
+// changed log out button, added backtest tab
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { RiStockFill } from "react-icons/ri";
 import { Button } from "../Button/Button";
 import { IconContext } from "react-icons/lib";
+import { auth } from "../../config/firebase";
 import "./Navbar.css";
 
 function Navbar() {
@@ -50,6 +53,15 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <Link
+                  to="/backtest"
+                  className="nav-links"
+                  onClick={closedMobileMenu}
+                >
+                  Backtest
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
                   to="/portfolio"
                   className="nav-links"
                   onClick={closedMobileMenu}
@@ -68,19 +80,14 @@ function Navbar() {
               </li>
               <li className="nav-btn">
                 {button ? (
-                  <Link to="/logout" className="btn-link">
-                    <Button buttonStyle="btn--outline">LOG OUT</Button>
-                  </Link>
+                  <Button buttonStyle="btn--outline" onClick = {() => {auth.signOut()}}> LOG OUT </Button>
                 ) : (
-                  <Link to="/logout" className="btn-link">
-                    <Button
+                  <Button
                       buttonStyle="btn--outline"
                       buttonSize="btn--mobile"
-                      onClick={closedMobileMenu}
-                    >
-                      LOG OUT
-                    </Button>
-                  </Link>
+                      onClick = {() => {auth.signOut()}}
+                  > 
+                  LOG OUT</Button>
                 )}
               </li>
             </ul>

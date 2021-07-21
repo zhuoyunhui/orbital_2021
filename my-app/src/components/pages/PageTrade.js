@@ -6,8 +6,7 @@ To include 'trade now!' button that creates a pop-up window
     2) Firestore to update the trade records & retrieve userID data 
 */
 // import DisplayStock from "../StockPage";
-import React, { useState } from "react"; //useContext
-// import { UserContext } from "../UserProvider.jsx";
+import React, { useState } from "react";
 import { Box } from "@material-ui/core";
 import TradingView from "../TradingView";
 import Sell from "../Sell";
@@ -28,19 +27,21 @@ const Trade = () => {
       </div>
       <div className="functions">
         <Box pt={2} pb={3}>
-          <h1>Trade Now!</h1>
+          <h1 style={{ fontFamily: "Quantico" }}>Trade Now!</h1>
         </Box>
-        <label htmlFor="ticker">Ticker: </label>
+        <label htmlFor="ticker" style={{ fontFamily: "Quantico" }}>
+          Ticker:{" "}
+        </label>
         <select value={ticker} onChange={handleInputChange} name="ticker">
           <option value="aapl">AAPL</option>
           <option value="amzn">AMZN</option>
           <option value="gme">GME</option>
           <option value="tsla">TSLA</option>
         </select>
-        <Box pt={3}>
+        <Box pt={4}>
           <Buy ticker={ticker} />
         </Box>
-        <Box pt={3}>
+        <Box pt={5}>
           <Sell ticker={ticker} />
         </Box>
       </div>

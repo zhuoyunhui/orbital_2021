@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Quantico&display=swap");
+
+.PageBacktest {
+  text-align: center;
+  font-family: "Quantico", sans-serif;
+  color: #1c2237;
+}
+
+.header {
+  font-family: "Quantico", sans-serif;
+  color: #1c2237;
+}
+
+.command {
+  height: 270px;
+  overflow: scroll;
+}
+
+.content {
+  padding: 2px;
+}
