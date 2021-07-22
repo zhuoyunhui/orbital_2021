@@ -36,7 +36,7 @@ function DailyPnl() {
                 });
         };
         daily();
-    }, []);
+    });
 
 
 

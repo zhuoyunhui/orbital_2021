@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { firestore } from "../config/firebase";
 import { UserContext } from "../providers/UserProvider";
 import { Stockprice } from "./Stockprice";
@@ -29,7 +29,7 @@ function UnrealisedBal() {
         });
     };
     getBal();
-  }, []);
+  });
 
   return <div>Unrealised Balance: {(user.unrealisedBalance).toFixed(2)}</div>;
 }

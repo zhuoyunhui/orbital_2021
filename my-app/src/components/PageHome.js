@@ -20,7 +20,6 @@ const Home = () => {
     displayName,
     email,
     availBalance,
-    unrealisedBalance
   } = user;
   console.log(user);
   const classes = useStyles();
