@@ -47,6 +47,7 @@ export const generateUserDocument = async (user, additionalData) => {
         photoURL,
         unrealisedBalance: 10000,
         availBalance: 10000,
+        dailypnl: 0,
         ...additionalData,
       });
     } catch (error) {

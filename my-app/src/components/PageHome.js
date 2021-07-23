@@ -46,7 +46,7 @@ const Home = () => {
             <h3 className="italic">{email}</h3>
           </div>
         </div>
-        <div className="availBal">Available Balance: {availBalance}</div>
+        <div className="availBal">Available Balance: {(availBalance).toFixed(2)}</div>
         <UnrealisedBal />
       </div>
     </div>
