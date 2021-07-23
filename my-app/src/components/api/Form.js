@@ -62,7 +62,7 @@ export const TickerForm = ({ onData }) => {
               }
             }}
           >
-            submit
+            Backtest
           </Button>
         </Form.Field>
       </Form.Group>
