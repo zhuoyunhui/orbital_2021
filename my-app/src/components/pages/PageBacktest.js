@@ -28,7 +28,7 @@ const PageBacktest = () => {
 
   useEffect(() => {
     fetch(
-      `http://52.163.86.242:5000/backtest?ticker=${ticker}&day=${day}&month=${month}&year=${year}`
+      `https://pypr-backtest.herokuapp.com/backtest?ticker=${ticker}&day=${day}&month=${month}&year=${year}`
     )
       .then((res) => res.json())
       .then((data) => {
