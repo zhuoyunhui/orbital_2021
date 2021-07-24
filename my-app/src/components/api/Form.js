@@ -26,7 +26,7 @@ export const TickerForm = () => {
         <Form.Group widths="equal">
           <Form.Field>
             <Input
-              placeholder="stock (eg. APPL)"
+              placeholder="stock (eg. AAPL)"
               value={stock}
               onChange={(e) => setStock(e.target.value)}
             />
