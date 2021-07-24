@@ -29,7 +29,7 @@ function UnrealisedBal() {
         });
     }
     getBal();
-  }, [prices, user.availBalance, user.email, user.uid]);
+  }); //[]
 
   return <div>Unrealised Balance: ${user.unrealisedBalance.toFixed(2)}</div>;
 }
