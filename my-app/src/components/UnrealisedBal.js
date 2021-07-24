@@ -6,7 +6,7 @@ import { Stockprice } from "./Stockprice";
 function UnrealisedBal() {
   const user = useContext(UserContext);
   var prices = [];
-  
+
   useEffect(() => {
     async function getBal() {
       const querySnapshot = await firestore
@@ -25,13 +25,13 @@ function UnrealisedBal() {
         .doc(user.uid)
         .update({
           unrealisedBalance:
-            user.availBalance + prices.reduce((a, b) => a + b, 0)
+            user.availBalance + prices.reduce((a, b) => a + b, 0),
         });
-    };
+    }
     getBal();
   }, []);
 
-  return <div>Unrealised Balance: {(user.unrealisedBalance).toFixed(2)}</div>;
+  return <div>Unrealised Balance: ${user.unrealisedBalance.toFixed(2)}</div>;
 }
 
 export default UnrealisedBal;

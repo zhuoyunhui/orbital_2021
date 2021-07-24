@@ -50,7 +50,7 @@ const PageBacktest = () => {
 
   return (
     <>
-      <Container style={{ marginTop: 30 }}>
+      <Container style={{ marginTop: 40 }}>
         <h1 style={{ fontFamily: "Quantico" }}>
           Backtest using Guppy Multiple Moving Average!
         </h1>
