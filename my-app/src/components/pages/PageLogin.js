@@ -1,8 +1,8 @@
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
-import { Button, Container } from "@material-ui/core"; //Box, Paper,
+import { Button, Container, Grid } from "semantic-ui-react"; //Box, Paper,
 import image from "../Images/img-01.png";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import Particles from "react-tsparticles";
 import "./PageLogin.css";
 
 var rootStyle = {
@@ -13,7 +13,6 @@ var rootStyle = {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -29,29 +28,138 @@ function PageAuth() {
   const classes = useStyles();
 
   return (
-    <div style={rootStyle}>
-      <Container component="main" maxWidth="xs" color="#fff">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <div className="image" data-tilt="">
-            <img src={image} alt="IMG" />
+    <>
+      <div style={rootStyle}>
+        <div className="Outer">
+          <div className="inner">
+            <Container textAlign="center">
+              <div className={classes.paper}>
+                <Container>
+                  <h1
+                    style={{
+                      fontFamily: "Quantico",
+                      fontSize: "200px",
+                      color: "white",
+                    }}
+                  >
+                    {" "}
+                    PYPR
+                  </h1>
+                  <div className="caption">
+                    <h3
+                      style={{
+                        fontFamily: "Quantico",
+                        fontSize: "40px",
+                        color: "white",
+                      }}
+                    >
+                      Web-based trading simulator
+                    </h3>
+                    <h4
+                      style={{
+                        fontFamily: "Quantico",
+                        fontSize: "20px",
+                        color: "white",
+                      }}
+                    >
+                      {" "}
+                      Explore & practice your trading strategies with no
+                      financial risk!{" "}
+                    </h4>
+                    <div className="button">
+                      <FirebaseAuthConsumer>
+                        {({ firebase }) => (
+                          <Button
+                            variant="contained"
+                            color="violet"
+                            onClick={() => handleSignIn(firebase)}
+                          >
+                            SIGN IN WITH GOOGLE
+                          </Button>
+                        )}
+                      </FirebaseAuthConsumer>
+                    </div>
+                  </div>
+                </Container>
+              </div>
+            </Container>
           </div>
-          <div className="SignIn">
-            <FirebaseAuthConsumer>
-              {({ firebase }) => (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => handleSignIn(firebase)}
-                >
-                  Sign in with Google
-                </Button>
-              )}
-            </FirebaseAuthConsumer>
-          </div>
+          <Particles
+            id="tsparticles"
+            options={{
+              background: {
+                color: {
+                  value: "#1c2237",
+                },
+              },
+              fpsLimit: 60,
+              interactivity: {
+                detectsOn: "canvas",
+                events: {
+                  resize: true,
+                },
+                modes: {
+                  bubble: {
+                    distance: 400,
+                    duration: 2,
+                    opacity: 0.8,
+                    size: 40,
+                  },
+                  push: {
+                    quantity: 4,
+                  },
+                  repulse: {
+                    distance: 200,
+                    duration: 0.4,
+                  },
+                },
+              },
+              particles: {
+                color: {
+                  value: "#ffffff",
+                },
+                links: {
+                  color: "#ffffff",
+                  distance: 150,
+                  enable: true,
+                  opacity: 0.5,
+                  width: 1,
+                },
+                collisions: {
+                  enable: true,
+                },
+                move: {
+                  direction: "none",
+                  enable: true,
+                  outMode: "bounce",
+                  random: false,
+                  speed: 2,
+                  straight: false,
+                },
+                number: {
+                  density: {
+                    enable: true,
+                    value_area: 800,
+                  },
+                  value: 80,
+                },
+                opacity: {
+                  value: 0.5,
+                },
+                shape: {
+                  type: "circle",
+                },
+                size: {
+                  random: true,
+                  value: 5,
+                },
+              },
+              detectRetina: true,
+            }}
+          />
         </div>
-      </Container>
-    </div>
+      </div>
+    </>
   );
 }
 
