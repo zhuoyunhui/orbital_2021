@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Input, Button, Grid, Container } from "semantic-ui-react";
 
 export const TickerForm = () => {
@@ -57,7 +57,7 @@ export const TickerForm = () => {
               onClick={async () => {
                 const ticker = { stock, day, month, year };
                 // const response =
-                fetch("/ticker", {
+                fetch("https://pypr-backtest.herokuapp.com/ticker", {
                   method: "POST",
                   action: "{{ url_for('ticker') }}",
                   headers: {
