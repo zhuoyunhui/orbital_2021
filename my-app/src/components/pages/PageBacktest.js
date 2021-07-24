@@ -1,14 +1,12 @@
 // performance dashboard
 import React, { useState, useEffect } from "react";
 import { TickerForm } from "../api/Form";
-import { Container, Grid, Table } from "semantic-ui-react";
+import { Container, Grid } from "semantic-ui-react";
 import "./PageBacktest.css";
 
 const PageBacktest = () => {
   const [stocks, setStocks] = useState("");
-  const [date, setDate] = useState();
   const [sample_size, setSample_size] = useState("");
-  const [emaused, setEmaused] = useState([]);
   const [batting_Avg, setBatting_Avg] = useState("");
   const [gainLossRatio, setGainLossRatio] = useState("");
   const [averageGain, setAverageGain] = useState("");
@@ -34,9 +32,7 @@ const PageBacktest = () => {
       .then((data) => {
         console.log("useEffect");
         setStocks(data.stock);
-        setDate(data.date);
         setSample_size(data.sample_size);
-        setEmaused(data.EMAs_used);
         setBatting_Avg(data.Batting_Avg);
         setGainLossRatio(data.GainLoss_ratio);
         setAverageGain(data.Average_Gain);

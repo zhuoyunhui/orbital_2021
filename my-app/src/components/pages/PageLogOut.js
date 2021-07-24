@@ -2,9 +2,6 @@ import { FirebaseAuthConsumer } from "@react-firebase/auth";
 import {auth} from "../../config/firebase";
 
 function SignOut() {
-  const handleLogout = (firebase) => {
-    firebase.auth().signOut();
-  };
 
   return (
     <>
