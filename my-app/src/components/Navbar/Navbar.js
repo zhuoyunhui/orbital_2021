@@ -60,34 +60,37 @@ function Navbar() {
                   Backtest
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link
-                  to="/portfolio"
-                  className="nav-links"
-                  onClick={closedMobileMenu}
-                >
-                  Portfolio
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/profile"
-                  className="nav-links"
-                  onClick={closedMobileMenu}
-                >
-                  Profile
-                </Link>
-              </li>
+              <div className="port">
+                <li className="nav-item">
+                  <Link
+                    to="/portfolio"
+                    className="nav-links"
+                    onClick={closedMobileMenu}
+                  >
+                    Portfolio
+                  </Link>
+                </li>
+              </div>
               <li className="nav-btn">
                 {button ? (
-                  <Button buttonStyle="btn--outline" onClick = {() => {auth.signOut()}}> LOG OUT </Button>
+                  <Button
+                    buttonStyle="btn--outline"
+                    onClick={() => {
+                      auth.signOut();
+                    }}
+                  >
+                    Log Out
+                  </Button>
                 ) : (
                   <Button
-                      buttonStyle="btn--outline"
-                      buttonSize="btn--mobile"
-                      onClick = {() => {auth.signOut()}}
-                  > 
-                  LOG OUT</Button>
+                    buttonStyle="btn--outline"
+                    buttonSize="btn--mobile"
+                    onClick={() => {
+                      auth.signOut();
+                    }}
+                  >
+                    Log Out
+                  </Button>
                 )}
               </li>
             </ul>
@@ -98,6 +101,4 @@ function Navbar() {
   );
 }
 
-
 export default Navbar;
-

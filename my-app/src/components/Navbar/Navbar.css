@@ -6,12 +6,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-family: "Quantico", sans-serif;
   position: sticky;
   top: 0;
   z-index: 999;
 }
+
 .navbar-container {
   display: flex;
   justify-content: space-between;
@@ -33,7 +34,7 @@
   justify-self: start;
   cursor: pointer;
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 2.5rem;
   display: flex;
   align-items: center;
 }
@@ -54,6 +55,10 @@
 .nav-item {
   height: 80px;
   border-bottom: 2px solid transparent;
+}
+
+.port {
+  padding-right: 15px;
 }
 
 .nav-item:hover {
