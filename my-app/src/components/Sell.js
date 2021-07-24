@@ -30,7 +30,7 @@ function Sell({ ticker }) {
         console.log("You have insufficient stock quantity.");
         setError(true);
       } else {
-        if (quantity == sdata.quantity) {
+        if (quantity === sdata.quantity) {
           await firestore
             .collection("positions")
             .doc(user.email + " " + ticker)

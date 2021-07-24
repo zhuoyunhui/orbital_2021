@@ -32,7 +32,7 @@ function DisplayPos() {
       setPositions(pposition);
     }
     display();
-  }, []);
+  }); //[])
 
   return (
     <table class="DisplayTable">

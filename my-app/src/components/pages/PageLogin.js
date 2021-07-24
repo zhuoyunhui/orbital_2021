@@ -1,6 +1,5 @@
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
-import { Button, Container, Grid } from "semantic-ui-react"; //Box, Paper,
-import image from "../Images/img-01.png";
+import { Button, Container } from "semantic-ui-react"; //Box, Paper,
 import { makeStyles } from "@material-ui/core/styles";
 import Particles from "react-tsparticles";
 import "./PageLogin.css";

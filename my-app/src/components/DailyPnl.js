@@ -38,7 +38,7 @@ function DailyPnl() {
         });
     }
     daily();
-  }, []);
+  }, [prices, user.email, user.uid]);
 
   return <div>Daily Profit & Loss: ${user.dailypnl.toFixed(2)}</div>;
 }
