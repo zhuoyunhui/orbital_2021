@@ -42,13 +42,16 @@ export const TickerForm = ({ onData }) => {
           <Button
             onClick={async () => {
               const ticker = { stock, day, month, year };
-              const response = await fetch("/ticker", {
-                method: "POST",
-                action: "{{ url_for('ticker') }}",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(ticker),
+              // const response = await fetch("/ticker", {
+              //   method: "POST",
+              //   action: "{{ url_for('ticker') }}",
+              //   headers: {
+              //     "Content-Type": "application/json",
+              //   },
+              //   body: JSON.stringify(ticker),
+              // });
+              const response = await fetch("/backtest?ticker=F", {
+                method: "GET",
               });
 
               if (response.ok) {
