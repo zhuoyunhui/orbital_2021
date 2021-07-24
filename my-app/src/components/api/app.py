@@ -1,11 +1,10 @@
-from flask import Flask, jsonify, request, redirect, url_for
+from flask import Flask, jsonify, request, redirect, url_for, Response
 from flask_cors import CORS, cross_origin
 from backtest import backtesting
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-
 
 @app.route('/ticker', methods=['POST'])
 @cross_origin()
