@@ -44,7 +44,7 @@ const Home = () => {
               <div className="innerfont">
                 <h3 style={{ fontFamily: "Quantico" }}>
                   Available Balance:{"  $"}
-                  {availBalance}
+                  {(availBalance).toFixed(2)}
                 </h3>
                 <h3 style={{ fontFamily: "Quantico" }}>
                   <UnrealisedBal />
