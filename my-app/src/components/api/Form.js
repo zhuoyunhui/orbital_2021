@@ -104,10 +104,10 @@ export const TickerForm = () => {
           </Form.Field>
         </Form.Group>
       </Form>
-      <Container style={{ marginTop: 1 }}>
+      <Container>
         <Grid
           divided="vertically"
-          style={{ marginTop: 20, fontFamily: "Quantico" }}
+          style={{ marginTop: 5, fontFamily: "Quantico" }}
         >
           <Grid.Row columns={2} style={{ marginTop: 15 }}>
             <Grid.Column>

@@ -34,10 +34,10 @@ function Navbar() {
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className="navbar">
           <div className="navbar-container container">
-            <Link className="navbar-logo" to="/" onClick={closedMobileMenu}>
+            <div className="navbar-logo">
               <RiStockFill className="navbar-icon" />
               PYPR
-            </Link>
+            </div>
             <div className="menu-icon" onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
             </div>
@@ -60,14 +60,24 @@ function Navbar() {
                   Backtest
                 </Link>
               </li>
+
+              <li className="nav-item">
+                <Link
+                  to="/portfolio"
+                  className="nav-links"
+                  onClick={closedMobileMenu}
+                >
+                  Portfolio
+                </Link>
+              </li>
               <div className="port">
                 <li className="nav-item">
                   <Link
-                    to="/portfolio"
+                    to="/profile"
                     className="nav-links"
                     onClick={closedMobileMenu}
                   >
-                    Portfolio
+                    Profile
                   </Link>
                 </li>
               </div>
