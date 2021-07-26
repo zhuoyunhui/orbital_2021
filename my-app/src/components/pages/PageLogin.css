@@ -1,10 +1,9 @@
-
-
 .Outer {
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
+  padding-top: 5%;
 }
 
 .inner {
@@ -17,5 +16,5 @@
 }
 
 .button {
-    padding-top: 25px;
+  padding-top: 25px;
 }
