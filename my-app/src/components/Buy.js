@@ -13,6 +13,7 @@ import { UserContext } from "../providers/UserProvider";
 import firebase from "firebase/app";
 import { Button, Grid } from "semantic-ui-react";
 import { Stockprice } from "./Stockprice";
+import { UnrealisedBal } from "./UnrealisedBal";
 import "./Buy.css";
 
 function Buy({ ticker }) {
@@ -68,7 +69,7 @@ function Buy({ ticker }) {
         .doc(user.email + " " + data.ticker)
         .get();
       if (pdoc.exists) {
-        /* update avgPrice (NOT TESTED) */
+        /* update avgPrice*/
         const pdata = pdoc.data();
         console.log(pdata);
         const newAvg =
@@ -98,6 +99,7 @@ function Buy({ ticker }) {
       console.log("Not enough Balance.");
       setError(true);
     }
+    UnrealisedBal();
   };
 
   const newTrade = () => {

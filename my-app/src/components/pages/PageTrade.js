@@ -33,10 +33,16 @@ const Trade = () => {
           Ticker:{" "}
         </label>
         <select value={ticker} onChange={handleInputChange} name="ticker">
-          <option value="aapl">AAPL</option>
-          <option value="amzn">AMZN</option>
-          <option value="gme">GME</option>
-          <option value="tsla">TSLA</option>
+          <option value="googl">Alphabet(GOOGL)</option>
+          <option value="amzn">Amazon.com(AMZN)</option>
+          <option value="aapl">Apple(AAPL)</option>
+          <option value="ebay">eBay(EBAY)</option>
+          <option value="fb">Facebook(FB)</option>
+          <option value="msft">Microsoft(MSFT)</option>
+          <option value="nflx">Netflix(NFLX)</option>
+          <option value="nvda">NVIDIA Corp(NVDA)</option>
+          <option value="roku">Roku Inc(ROKU)</option>
+          <option value="tsla">Tesla Motors(TSLA)</option>
         </select>
         <Box pt={4}>
           <Buy ticker={ticker} />
