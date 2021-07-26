@@ -13,7 +13,7 @@ import { UserContext } from "../providers/UserProvider";
 import firebase from "firebase/app";
 import { Button, Grid } from "semantic-ui-react";
 import { Stockprice } from "./Stockprice";
-import { UnrealisedBal } from "./UnrealisedBal";
+// import { UnrealisedBal } from "./UnrealisedBal";
 import "./Buy.css";
 
 function Buy({ ticker }) {
@@ -99,7 +99,7 @@ function Buy({ ticker }) {
       console.log("Not enough Balance.");
       setError(true);
     }
-    UnrealisedBal();
+    // UnrealisedBal();
   };
 
   const newTrade = () => {
